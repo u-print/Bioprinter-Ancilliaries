@@ -5,13 +5,16 @@ Created on Mon Mar 21 13:54:51 2022
 @author: ollpo511
 """
 
-input()
+input("Welcome to the U-PRINT bioprinter well to plate script. Press any key to start.")
+
 import re
 try:
     import numpy as np
     import cv2 as cv
+    import matplotlib.pyplot as plt
 except:
     raise ImportError("Pre-requisite packages numpy and OpenCV not found. Please install these packages.")
+    input()
 #import ipdb
 
 START_LINE = 209
@@ -116,8 +119,7 @@ def outputConcat(totalGCode, fn):
         for line in totalGCode:
             fh.write(f"{line}")
             
-if __name__ == '__main__':
-    
+if __name__ == '__main__':   
     # startingwell="B2"
     # displacement = 25
     # obj_fn="220906_halfsphere"
@@ -148,11 +150,11 @@ if __name__ == '__main__':
             img = cv.circle(img,(cposx,cposy),40,(255,255,255),-1)
             img = cv.putText(img,names[row,col],org = (cposx-20,cposy+15), fontFace=cv.FONT_HERSHEY_SIMPLEX,fontScale=1,color = (0,255,0),thickness=2,lineType=cv.LINE_AA)
     
-    cv.imshow("Wells printed into",img)
+    plt.figure()
+    plt.imshow(img)
     obj = readGCode(obj_fn)
     orig_obj = obj
     total = concatObjects(obj, [cols,rows], displacement,[0,0], transitionalMacroFn)
     outputConcat(total,f"{obj_fn}_r{rows}_c{cols}.gcode")
-    input()
-    cv.waitKey(0)
+    input("Showing image. Press any key to exit.")
     
