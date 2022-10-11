@@ -150,8 +150,9 @@ if __name__ == '__main__':
             img = cv.circle(img,(cposx,cposy),40,(255,255,255),-1)
             img = cv.putText(img,names[row,col],org = (cposx-20,cposy+15), fontFace=cv.FONT_HERSHEY_SIMPLEX,fontScale=1,color = (0,255,0),thickness=2,lineType=cv.LINE_AA)
     
-    plt.figure()
+    fig = plt.figure()
     plt.imshow(img)
+    plt.savefig(f"{obj_fn}_r{rows}_c{cols}.png")
     obj = readGCode(obj_fn)
     orig_obj = obj
     total = concatObjects(obj, [cols,rows], displacement,[0,0], transitionalMacroFn)
