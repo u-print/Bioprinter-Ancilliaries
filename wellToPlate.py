@@ -5,13 +5,14 @@ Created on Mon Mar 21 13:54:51 2022
 @author: ollpo511
 """
 
+input()
 import re
 try:
     import numpy as np
     import cv2 as cv
 except:
     raise ImportError("Pre-requisite packages numpy and OpenCV not found. Please install these packages.")
-import ipdb
+#import ipdb
 
 START_LINE = 209
 END_LINE = 790
@@ -152,5 +153,6 @@ if __name__ == '__main__':
     orig_obj = obj
     total = concatObjects(obj, [cols,rows], displacement,[0,0], transitionalMacroFn)
     outputConcat(total,f"{obj_fn}_r{rows}_c{cols}.gcode")
+    input()
     cv.waitKey(0)
     
