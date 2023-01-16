@@ -15,8 +15,8 @@ def insert_gcode(gcode):
     for i, line in enumerate(gcode):
         if T_pattern.match(line) and "layer" not in gcode[i-1]:
             modified_gcode.append(line)
-            modified_gcode.append("G1 R2 X0 Y0\n")
-            modified_gcode.append("G1 R2 Z0\n")
+            modified_gcode.append("G1 R2 X0 Y0 F10000\n")
+            modified_gcode.append("G1 R2 Z0 F5000\n")
         else:
             modified_gcode.append(line)
     return modified_gcode
